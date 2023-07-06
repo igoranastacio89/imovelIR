@@ -10,11 +10,14 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-image: url('imagemCidade.jpeg');
+            background-image: url('/imagemCidade.jpeg');
             background-size: cover;
+            background-repeat: no-repeat;
             background-position: center;
             margin: 0;
             padding: 0;
+            height: 100vh;
+            max-height: 100vh;
         }
 
         .container {
@@ -22,7 +25,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: 95vh;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -31,9 +34,10 @@
             background-color: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
             padding: 20px;
-            width: 100%;
+            width: 100% - 20;
             max-width: 400px;
             margin: 0 auto;
+            height: 270px
         }
 
         .form input[type="text"] {
@@ -49,11 +53,14 @@
         .calc-result {
             font-weight: bold;
             color: white;
+            font-size: 20px;
+            margin-bottom: 10px
         }
 
         .mdl-button {
             margin-top: 10px;
             width: 100%;
+            height: 20%;
             display: flex;
             justify-content: center;
             background-color: #f1e130;
@@ -86,6 +93,10 @@
             margin: 10px;
         }
 
+        .mdl-textfield{
+            width: 100% !important;
+        }
+
         @media only screen and (max-width: 600px) {
             .title-text {
                 font-size: 24px;
@@ -93,10 +104,33 @@
             .form input[type="text"] {
                 width: calc(100%);
             }
+            .container{
+                height: 90vh;
+            }
         }
     </style>
 </head>
 <body>
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-analytics.js"></script>
+
+    <script>
+      // Inicialize o Firebase com suas credenciais
+      var firebaseConfig = {
+        apiKey: "AIzaSyDN7OSIfMdC9ZJc3NKb_6qOtDrz62fnPMc",
+        authDomain: "imovelir-9026b.firebaseapp.com",
+        projectId: "imovelir-9026b",
+        storageBucket: "imovelir-9026b.appspot.com",
+        messagingSenderId: "468969552830",
+        appId: "1:468969552830:web:b58c05f4e11d9295c257ef",
+        measurementId: "G-KYLY0J6W77"
+      };
+
+      // Inicialize o Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
      <script>
@@ -113,15 +147,13 @@
          <p class="subtitle-text">Seu Carnê-Leão do mês em poucos passos, rápido, fácil, seguro e 100% gratuito!</p>
     </div>
     <div class="form">
-            <div class="mdl-textfield mdl-js-textfield">
-                <input type="text" id="valor-aluguel" placeholder="Valor do Aluguel (Base de Cálculo)" oninput="calculate()">
-                <input type="text" id="despesas" placeholder="Descontos" oninput="calculate()">
+            <div >
+                <input type="text" id="valor-aluguel" placeholder="Valor do Aluguel (Base de Cálculo)" onkeyup="calculate()">
+                <input type="text" id="despesas" placeholder="Despesas" onkeyup="calculate()">
             </div>
             <div class="calc-result">(=) Base de Cálculo: <span id="base-calculo"></span></div>
             <div class="calc-result">(=) Saldo de Imposto a pagar: <span id="saldo-imposto"></span></div>
             
-
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="calculate()">Calcular</button>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="generateDARF()">Gerar DARF</button>
 
             <div style="visibility: hidden; class="calc-result">(-) Desconto simplificado: <span id="desconto-simplificado">Cálculo aqui</span></div>
@@ -173,9 +205,16 @@
         }
 
         function generateDARF() {
-            var numeroWhatsapp = "SEU_NUMERO_DE_WHATSAPP"; // Substitua pelo número de WhatsApp desejado
+            
+            firebase.analytics().logEvent("clicouEmGerarDarf", {
+                parametro1: "valor1",
+                parametro2: "valor2"
+              });
+
+            var numeroWhatsapp = "11981552700"; // Substitua pelo número de WhatsApp desejado
             var valorAluguel = document.getElementById('valor-aluguel').value;
-            var mensagem = "Olá, gostaria de gerar o DARF do aluguel. Valor do aluguel: R$ " + valorAluguel;
+            var valorDespesas = document.getElementById('despesas').value;
+            var mensagem = "Olá, gostaria de gerar o DARF do aluguel. Valor do aluguel: R$ " + valorAluguel + " e despesas: R$ " + valorDespesas;
 
             var linkWhatsapp = "https://wa.me/" + numeroWhatsapp + "?text=" + encodeURIComponent(mensagem);
             window.open(linkWhatsapp, "_blank");
