@@ -10,7 +10,7 @@
 
     <style>
         body {
-            font-family: 'Delecta', sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-image: url('/imagemCidade.jpeg');
             background-size: cover;
             background-repeat: no-repeat;
@@ -19,11 +19,6 @@
             padding: 0;
             height: 100vh;
             max-height: 100vh;
-        }
-
-        @font-face {
-            font-family: 'Delecta'; 
-            src: url('/font/font.otf') format('opentype');
         }
 
         .container {
@@ -60,7 +55,6 @@
             font-weight: bold;
             color: white;
             font-size: 20px;
-            font-weight: 100;
             margin-bottom: 30px
             margin-top: 30px;
         }
@@ -80,14 +74,15 @@
         }
 
         .title-text {
-            font-family: 'Delecta', sans-serif;
+            font-family: 'Roboto', sans-serif;
             font-size: 30px;
             color: #f1e130;
             margin-bottom: 10px;
+              font-weight: 600;
         }
 
         .subtitle-text {
-            font-family: 'Delecta', sans-serif;
+            font-family: 'Roboto', sans-serif;
             font-weight: 400;
             font-style: italic;
             font-size: 14px;
@@ -124,7 +119,16 @@
         }
 
         .info-button i {
-            color: #999;
+            
+            position: absolute;
+            margin-bottom: 5px; /* Ajuste a posição vertical conforme necessário */
+            right: 8px;
+            font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
+          width: 20px; /* Ajuste a largura do botão conforme necessário */
+          height: 18px; /* Ajuste a altura do botão conforme necessário */
+          background-color: white; /* Altere a cor de fundo para vermelho */
+          color: red; /* Altere a cor do ícone para branco, se necessário */
+          
         }
 
         .info-button:hover i {
@@ -133,7 +137,6 @@
 
         .label-white {
           color: #fff;
-          font-weight: 100;
         }
     
         .label-yellow {
@@ -150,13 +153,11 @@
           border-radius: 5px;
           border: none;
           cursor: pointer;
-          transition: background-color 0.3s ease-in-out;
         }
 
         .custom-button:hover {
-            background-color: #0056b3;
+          background-color: #0056b3;
         }
-
 
         @media only screen and (max-width: 600px) {
             .title-text {
@@ -205,8 +206,9 @@
     <img class="logo" src="/logoImovelIR.png" alt="Logotipo">
     <div class="container">
     <div class="text-container">
-        <h2 class="title-text">Calculadora de Imposto <br> sobre aluguel de pessoa física</h2>
-        <p class="subtitle-text">Seu Carnê-Leão do mês em poucos passos, rápido, fácil, seguro e 100% gratuito!</p>
+        <p class="title-text">Calculadora de imposto sobre aluguel
+         de pessoa física</p>
+         <p class="subtitle-text">Seu Carnê-Leão do mês em poucos passos, rápido, fácil, seguro e 100% gratuito!</p>
     </div>
     <div class="form">
             <div>
@@ -214,10 +216,10 @@
               <input type="text" id="valor-aluguel" placeholder="Digite aqui" onkeyup="calculate()">
             </div>
 
-            <div>
+            <div style="position: relative;">
               <label for="despesas" class="label-white">Despesas</label>
               <input type="text" id="despesas" placeholder="Digite aqui" onkeyup="calculate()">
-              <button class="info-button" onmouseover="showInfoText()">
+              <button class="info-button" onmouseover="showInfoText()" style="top: 30px; right: 15px; transform: translateX(100%);">
                 <i class="fas fa-info-circle"></i>
               </button>
             </div>
