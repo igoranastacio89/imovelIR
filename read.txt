@@ -60,7 +60,6 @@
             font-weight: bold;
             color: white;
             font-size: 20px;
-            font-weight: 100;
             margin-bottom: 30px
             margin-top: 30px;
         }
@@ -133,7 +132,6 @@
 
         .label-white {
           color: #fff;
-          font-weight: 100;
         }
     
         .label-yellow {
@@ -150,13 +148,11 @@
           border-radius: 5px;
           border: none;
           cursor: pointer;
-          transition: background-color 0.3s ease-in-out;
         }
 
         .custom-button:hover {
-            background-color: #0056b3;
+          background-color: #0056b3;
         }
-
 
         @media only screen and (max-width: 600px) {
             .title-text {
@@ -205,8 +201,9 @@
     <img class="logo" src="/logoImovelIR.png" alt="Logotipo">
     <div class="container">
     <div class="text-container">
-        <h2 class="title-text">Calculadora de Imposto <br> sobre aluguel de pessoa física</h2>
-        <p class="subtitle-text">Seu Carnê-Leão do mês em poucos passos, rápido, fácil, seguro e 100% gratuito!</p>
+        <p class="title-text">Calculadora de imposto <br> sobre aluguel
+         de pessoa física</p>
+         <p class="subtitle-text">Seu Carnê-Leão do mês em poucos passos, rápido, fácil, seguro e 100% gratuito!</p>
     </div>
     <div class="form">
             <div>
